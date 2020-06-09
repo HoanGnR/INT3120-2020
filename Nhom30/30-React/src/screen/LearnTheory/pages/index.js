@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Dimensions, Image } from 'react-native'
+import { View, Text, Dimensions, Image, ActivityIndicator } from 'react-native'
 import BasePage from '../../../base/BasePage'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { routes } from '../../../../route/config'
@@ -10,8 +10,11 @@ class LearnTheoryScreen extends BasePage {
     constructor(props) {
         super(props)
         this.state = {
-
+            data: null
         }
+    }
+    componentDidMount() {
+
     }
     navigateToDetails = (item) => {
         this.props.navigation.navigate('LearnDetailsScreen', item)
@@ -19,19 +22,19 @@ class LearnTheoryScreen extends BasePage {
     renderItem = (item) => {
 
         return (
-            <TouchableOpacity style={{width:'100%'}} onPress={() => this.navigateToDetails(item)}>
-                <Card style={{ height: 70, flexDirection: 'row', borderRadius:5 }}>
+            <TouchableOpacity style={{ width: '100%' }} onPress={() => this.navigateToDetails(item)}>
+                <Card style={{ height: 70, flexDirection: 'row', borderRadius: 5 }}>
                     <View style={{ width: '20%', justifyContent: 'center', alignItem: 'center', padding: 10 }}>
-                        <View style={{ backgroundColor: 'green', alignItems: 'center', justifyContent: 'center', width: '67%', height: '100%', borderRadius: 100 }}>
+                        <View style={{ backgroundColor: 'green', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', borderRadius: 100 }}>
                             <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'white' }}>{item.label[0]}</Text>
                         </View>
                     </View>
-                    <View style={{ width: '100%', justifyContent: 'center' }}>
+                    <View style={{ width: '80%', justifyContent: 'center' }}>
                         <Text style={{ fontWeight: 'bold' }}>{item.label}</Text>
                         <View style={{ flexDirection: 'row' }}>
-                            <View style={{width:'70%', backgroundColor:'#c3c3c3', height:4,marginTop:8}}>
+                            <View style={{ width: '70%', backgroundColor: '#c3c3c3', height: 4, marginTop: 8 }}>
                             </View>
-                            <Text style={{paddingLeft:10, fontWeight:'bold'}}>{item.quantity} <Text style={{color:'green', fontWeight:'normal'}}>Câu</Text></Text>
+                            <Text style={{ paddingLeft: 10, fontWeight: 'bold' }}>{item.quantity} <Text style={{ color: 'green', fontWeight: 'normal' }}>Câu</Text></Text>
                         </View>
                     </View>
                 </Card>
@@ -45,6 +48,11 @@ class LearnTheoryScreen extends BasePage {
                 data.push(routes[i])
             }
         }
+        // if (!this.state.data) {
+        //     return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',paddingTop:20 }}>
+        //         <ActivityIndicator />
+        //     </View>
+        // }
         return (
             <View style={styles.view}>
                 <FlatList
@@ -64,7 +72,7 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
-        paddingTop:20
+        paddingTop: 20
     },
     renderItem: {
         touchable: {
